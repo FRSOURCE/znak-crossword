@@ -48,7 +48,7 @@ export default function ipuzVitePlugin(): PluginOption {
     load(id) {
       if (jsonFileRegex.test(id)) {
         const { idRewritten } = this.getModuleInfo(id)?.meta.ipuz ?? {}
-        if (!!idRewritten) {
+        if (idRewritten) {
           return load.call(this, id.replace(jsonFileRegex, '.ipuz$1'))
         }
       }

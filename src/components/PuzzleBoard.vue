@@ -1,62 +1,19 @@
 <script setup lang="ts" generic="EmptyValue extends string = '0', BlockValue extends string = '#'">
-import type { CrosswordPuzzle, LabeledCell, LabeledCellPrimitive } from '@/types'
-import { computed, provide, ref, type PropType } from 'vue'
 import PuzzleCell from '@/components/PuzzleCell.vue'
-import { useCrossword } from '@/composables/useCrossword'
-import { puzzleBoardContextKey, type ActiveCell } from './PuzzleBoardContext'
+import { usePuzzleContext } from '@/composables/usePuzzleContext'
 
-const props = defineProps({
-  puzzleData: {
-    type: Object as PropType<
-      CrosswordPuzzle<{ width: number; height: number }, EmptyValue, BlockValue>
-    >,
-    required: true,
-  },
-})
-
-const { board, saved, dimensions, metadata } = useCrossword({
-  crosswordData: computed(() => props.puzzleData),
-})
-
-const activeCell = ref<ActiveCell>({ direction: 'horizontal' })
-const setActiveCell = ({
-  x,
-  y,
-  direction,
-}: {
-  y?: number
-  x?: number
-  direction: ActiveCell['direction']
-}) => {
-  if (direction !== activeCell.value.direction) {
-    activeCell.value = { ...activeCell.value, direction }
-    return
-  }
-  if (x === undefined || y === undefined) {
-    activeCell.value = { x, y, direction }
-    return
-  }
-  if (x === activeCell.value?.x && y === activeCell.value?.y) return
-  if (x < 0 || x >= dimensions.value.width || y < 0 || y >= dimensions.value.height) return
-  if (
-    ([metadata.value.block, null] as (typeof board)['value'][number][number][]).includes(
-      board.value[y][x],
-    )
-  ) {
-    return
-  }
-
-  activeCell.value = { x, y, direction }
-}
-
-provide(puzzleBoardContextKey, {
-  activeCell,
+const {
   setActiveCell,
-})
+  puzzle: { dimensions, saved, board, metadata },
+} = usePuzzleContext<EmptyValue, BlockValue>()
 </script>
 
 <template>
-  <div role="grid" class="flex flex-col rounded overflow-hidden gap-px" translate="no">
+  <div
+    role="grid"
+    class="flex flex-col rounded overflow-hidden gap-px border bg-current"
+    translate="no"
+  >
     <div v-for="row in dimensions.height" :key="row" class="flex gap-px" role="row">
       <div v-for="column in dimensions.width" :key="column">
         <PuzzleCell

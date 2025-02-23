@@ -37,14 +37,15 @@ export type LabeledCellPrimitive<
   EmptyValue extends string = '0',
   BlockValue extends string = '#',
 > = null | EmptyValue | BlockValue | ClueNum
+export type LabeledCellObject<EmptyValue extends string = '0', BlockValue extends string = '#'> = {
+  cell?: LabeledCellPrimitive<EmptyValue, BlockValue>
+  style?: StyleSpec
+  /* Initial value the cell */
+  value?: string
+}
 export type LabeledCell<EmptyValue extends string = '0', BlockValue extends string = '#'> =
   | LabeledCellPrimitive<EmptyValue, BlockValue>
-  | {
-      cell: LabeledCellPrimitive<EmptyValue, BlockValue>
-      style: StyleSpec
-      /* Initial value the cell */
-      value: string
-    }
+  | LabeledCellObject<EmptyValue, BlockValue>
 
 export type GroupSpec = {
   /* Cells defined by a bounding rectangle */
@@ -57,46 +58,45 @@ export type GroupSpec = {
   style?: StyleSpec
 }
 
-export type Clue =
-  | string
-  | [ClueNum, string]
-  | {
-      /* The clue number (matches number in cell) */
-      number?: ClueNum
-      /* Clue numbers for clues that are for multiple entries */
-      numbers?: ClueNum[]
-      /* Text to display in the list of clues instead of the clue number */
-      label?: string
-      /* Cells, in order, this clue is for. Syntax: [col1, row1][] */
-      cells?: [number, number][]
-      /* The clue, can contain HTML syntax */
-      clue?: string
-      /* A series of hints which replace the clue, can contain HTML syntax */
-      hints?: string[]
-      /* Image to show for the clue (clue text becomes alt text) */
-      image?: string
-      /**
-       * The answer.
-       * Normally, the enumeration and answer for a clue are automatically calculated from the grid. If this cannot be done for some reason (e.g., phrases or variant cryptic crosswords with special rules), the proper values can be supplied with the clue
-       */
-      answer?: string
-      /* The enumeration of the answer */
-      enumeration?: Enumeration
-      /* Where this clue continues in the grid */
-      continued?: CrossReference[]
-      /* Other clues referenced by this clue */
-      references?: CrossReference[]
-      /* Type of the clue, displayed after successful solve or as a hint */
-      type?: string
-      /* Explanation, displayed after successful solve or as a hint. Can contain HTML syntax */
-      explanation?: string
-      /* Tags (e.g., &lit), displayed after successful solve or as a hint */
-      tags?: string[]
-      /* `true` to highlight the clue */
-      highlight?: boolean
-      /* Clue location for an ArrowWord puzzle. Syntax: [col, row] */
-      location?: [number, number]
-    }
+export type ClueObject = {
+  /* The clue number (matches number in cell) */
+  number?: ClueNum
+  /* Clue numbers for clues that are for multiple entries */
+  numbers?: ClueNum[]
+  /* Text to display in the list of clues instead of the clue number */
+  label?: string
+  /* Cells, in order, this clue is for. Syntax: [col1, row1][] */
+  cells?: [number, number][]
+  /* The clue, can contain HTML syntax */
+  clue?: string
+  /* A series of hints which replace the clue, can contain HTML syntax */
+  hints?: string[]
+  /* Image to show for the clue (clue text becomes alt text) */
+  image?: string
+  /**
+   * The answer.
+   * Normally, the enumeration and answer for a clue are automatically calculated from the grid. If this cannot be done for some reason (e.g., phrases or variant cryptic crosswords with special rules), the proper values can be supplied with the clue
+   */
+  answer?: string
+  /* The enumeration of the answer */
+  enumeration?: Enumeration
+  /* Where this clue continues in the grid */
+  continued?: CrossReference[]
+  /* Other clues referenced by this clue */
+  references?: CrossReference[]
+  /* Type of the clue, displayed after successful solve or as a hint */
+  type?: string
+  /* Explanation, displayed after successful solve or as a hint. Can contain HTML syntax */
+  explanation?: string
+  /* Tags (e.g., &lit), displayed after successful solve or as a hint */
+  tags?: string[]
+  /* `true` to highlight the clue */
+  highlight?: boolean
+  /* Clue location for an ArrowWord puzzle. Syntax: [col, row] */
+  location?: [number, number]
+}
+
+export type Clue = string | [ClueNum, string] | ClueObject
 
 /**
  * An Enumeration expression specifies what a value or solution looks like.

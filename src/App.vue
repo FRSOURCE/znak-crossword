@@ -1,7 +1,18 @@
 <script setup lang="ts">
-import PuzzleBoard from '@/components/PuzzleBoard.vue'
 import { computedAsync } from '@vueuse/core'
 import { ref } from 'vue'
+import Puzzle from './components/Puzzle.vue'
+
+if (!import.meta.env.SSR && window.visualViewport) {
+  document.body.style.height = `${window.visualViewport.height}px`
+  window.visualViewport.addEventListener(
+    'resize',
+    () => {
+      document.body.style.height = `${window.visualViewport?.height}px`
+    },
+    { passive: true },
+  )
+}
 
 const puzzles = {
   test: () => import('@/assets/test.ipuz'),
@@ -25,7 +36,7 @@ const puzzleData = computedAsync(
 )
 </script>
 <template>
-  <main class="min-h-screen flex flex-col items-center justify-center gap-2 bg-gray-900 text-white">
+  <main class="h-full flex flex-col items-center justify-center gap-2">
     Puzzles:
     <div class="flex gap-x-2 mb-4">
       <button
@@ -34,7 +45,7 @@ const puzzleData = computedAsync(
         :disabled="activePuzzleId === puzzleId"
         @click="activePuzzleId = puzzleId"
         class="px-4 py-2 border rounded hover:opacity-50 cursor-pointer"
-        :class="{ 'bg-white text-black': activePuzzleId === puzzleId }"
+        :class="{ 'bg-yellow-200': activePuzzleId === puzzleId }"
       >
         {{ puzzleId }}
       </button>
@@ -46,6 +57,6 @@ Error loading the puzzle: {{ puzzleLoadingError }} {{ puzzleData }}</pre
       >
     </div>
     <div v-else-if="!puzzleData">No puzzle data</div>
-    <PuzzleBoard v-else :puzzleData="puzzleData" />
+    <Puzzle v-else :puzzleData="puzzleData" />
   </main>
 </template>
