@@ -17,6 +17,7 @@ if (!import.meta.env.SSR && window.visualViewport) {
 const puzzles = {
   test: () => import('@/assets/test.ipuz'),
   another: () => import('@/assets/another.ipuz'),
+  'even bigger': () => import('@/assets/even-bigger.ipuz'),
 }
 const activePuzzleId = ref(Object.keys(puzzles)[0] as keyof typeof puzzles)
 const isPuzzleDataLoading = ref(false)

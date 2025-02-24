@@ -18,7 +18,7 @@ const props = defineProps({
     required: true,
   },
   emptyValue: {
-    type: String,
+    type: [String, Number],
     required: true,
   },
   blockValue: {
@@ -39,6 +39,10 @@ const isActiveLine = computed(
     (activeCell.value?.direction === 'vertical' && activeCell.value?.x === props.column) ||
     (activeCell.value?.direction === 'horizontal' && activeCell.value?.y === props.row),
 )
+
+if (!modelValue.value && props.cell.value) {
+  modelValue.value = props.cell.value
+}
 
 const setModelValueFromEvent = (e: Event) => {
   const { target } = e
@@ -106,7 +110,11 @@ async function sha256(source: string) {
     v-else
     class="bg-white relative before:content-[attr(data-clue)] before:absolute before:top-0.5 before:left-0.5 text-gray-800 before:text-sm focus-within:!bg-yellow-200 hover:!bg-yellow-100"
     :class="{ '!bg-blue-200': isActiveLine }"
-    :data-clue="typeof cell.cell === 'number' ? cell.cell : undefined"
+    :data-clue="
+      cell.cell !== emptyValue && cell.cell !== 0 && typeof cell.cell === 'number'
+        ? cell.cell
+        : undefined
+    "
   >
     <input
       class="w-full h-full opacity-0"

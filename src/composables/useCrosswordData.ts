@@ -53,8 +53,8 @@ export const useCrosswordData = <EmptyValue extends string = '0', BlockValue ext
       notes: crossword.value.notes,
       publisher: crossword.value.publisher,
       publication: crossword.value.publication,
-      empty: crossword.value.empty || '0',
-      block: crossword.value.block || '#',
+      empty: crossword.value.empty ?? '0',
+      block: crossword.value.block ?? '#',
     })),
   }
 }

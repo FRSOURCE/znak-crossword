@@ -1,467 +1,136 @@
 {
-  "showenumerations": true,
-  "notes": "",
-  "uniqueid": "another",
-  "puzzle": [
-    [
-      1,
-      ":",
-      ":",
-      ":",
-      2,
-      ":",
-      3,
-      ":",
-      4
-    ],
-    [
-      ":",
-      "#",
-      "#",
-      "#",
-      ":",
-      "#",
-      ":",
-      "#",
-      ":"
-    ],
-    [
-      5,
-      ":",
-      6,
-      ":",
-      ":",
-      ":",
-      ":",
-      "#",
-      ":"
-    ],
-    [
-      ":",
-      "#",
-      ":",
-      "#",
-      ":",
-      "#",
-      ":",
-      "#",
-      ":"
-    ],
-    [
-      7,
-      ":",
-      ":",
-      ":",
-      "#",
-      8,
-      ":",
-      ":",
-      ":"
-    ],
-    [
-      ":",
-      "#",
-      ":",
-      "#",
-      9,
-      "#",
-      ":",
-      "#",
-      ":"
-    ],
-    [
-      ":",
-      "#",
-      10,
-      ":",
-      ":",
-      ":",
-      ":",
-      ":",
-      ":"
-    ],
-    [
-      ":",
-      "#",
-      ":",
-      "#",
-      ":",
-      "#",
-      "#",
-      "#",
-      ":"
-    ],
-    [
-      11,
-      ":",
-      ":",
-      ":",
-      ":",
-      ":",
-      ":",
-      ":",
-      ":"
-    ]
-  ],
-  "copyright": "",
-  "intro": "",
-  "version": "http://ipuz.org/v2",
-  "origin": "Crossword Compiler 10.21",
-  "empty": ":",
-  "title": "",
+  "origin": "crosswordrace.com",
+  "version": "http://ipuz.org/v1",
   "kind": [
     "http://ipuz.org/crossword#1"
   ],
+  "author": "crosswordrace",
+  "publisher": "crosswordrace.com",
+  "title": "CR Puzzle 10",
+  "empty": "0",
+  "uniqueid": "another",
+  "dimensions": {
+    "width": 5,
+    "height": 5
+  },
+  "puzzle": [
+    [
+      "#",
+      1,
+      2,
+      3,
+      4
+    ],
+    [
+      "#",
+      5,
+      0,
+      0,
+      0
+    ],
+    [
+      6,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      7,
+      0,
+      0,
+      0,
+      "#"
+    ],
+    [
+      8,
+      0,
+      0,
+      0,
+      "#"
+    ]
+  ],
   "clues": {
     "Across": [
-      {
-        "enumeration": "9",
-        "number": 1,
-        "clue": "Angry exclamation? You're looking at it!"
-      },
-      {
-        "enumeration": "7",
-        "number": 5,
-        "clue": "Hacker man, heartless type, in front of computer"
-      },
-      {
-        "enumeration": "4",
-        "number": 7,
-        "clue": "Promises often appeal to heart at first"
-      },
-      {
-        "enumeration": "4",
-        "number": 8,
-        "clue": "Go pound around journal"
-      },
-      {
-        "enumeration": "7",
-        "number": 10,
-        "clue": "Annoyed, confused - but inoffensive"
-      },
-      {
-        "enumeration": "9",
-        "number": 11,
-        "clue": "Vessel following flavour the French considered vulgar"
-      }
+      [
+        1,
+        "Papa's partner"
+      ],
+      [
+        5,
+        "They make up everything"
+      ],
+      [
+        6,
+        "At-home ab exercises "
+      ],
+      [
+        7,
+        "Kilometers, grams, millimeters, etc  "
+      ],
+      [
+        8,
+        "Type of engineering specializing in machines and manufacturing"
+      ]
     ],
     "Down": [
-      {
-        "enumeration": "9",
-        "number": 1,
-        "clue": "Con men opt to reassemble part"
-      },
-      {
-        "enumeration": "4",
-        "number": 2,
-        "clue": "Stop in furious temper"
-      },
-      {
-        "enumeration": "7",
-        "number": 3,
-        "clue": "Cover amateur after six balls"
-      },
-      {
-        "enumeration": "9",
-        "number": 4,
-        "clue": "Creative types sensed rig toppling"
-      },
-      {
-        "enumeration": "7",
-        "number": 6,
-        "clue": "Fire girl with sword"
-      },
-      {
-        "enumeration": "4",
-        "number": 9,
-        "clue": "Instructions aren't even cloudier"
-      }
+      [
+        1,
+        "The Pine Tree State"
+      ],
+      [
+        2,
+        "Room in a house that's full of memories?"
+      ],
+      [
+        3,
+        "Place for a grin or a pout"
+      ],
+      [
+        4,
+        "Guitar booster"
+      ],
+      [
+        6,
+        "Tallied up"
+      ]
     ]
   },
-  "dimensions": {
-    "width": 9,
-    "height": 9
-  },
-  "author": "",
   "solution": [
     [
-      {
-        "value": "C",
-        "cell": 1
-      },
-      {
-        "value": "R",
-        "cell": ":"
-      },
-      {
-        "value": "O",
-        "cell": ":"
-      },
-      {
-        "value": "S",
-        "cell": ":"
-      },
-      {
-        "value": "S",
-        "cell": 2
-      },
-      {
-        "value": "W",
-        "cell": ":"
-      },
-      {
-        "value": "O",
-        "cell": 3
-      },
-      {
-        "value": "R",
-        "cell": ":"
-      },
-      {
-        "value": "D",
-        "cell": 4
-      }
+      "#",
+      "M",
+      "A",
+      "M",
+      "A"
     ],
     [
-      {
-        "value": "O",
-        "cell": ":"
-      },
       "#",
-      "#",
-      "#",
-      {
-        "value": "T",
-        "cell": ":"
-      },
-      "#",
-      {
-        "value": "V",
-        "cell": ":"
-      },
-      "#",
-      {
-        "value": "E",
-        "cell": ":"
-      }
+      "A",
+      "T",
+      "O",
+      "M"
     ],
     [
-      {
-        "value": "M",
-        "cell": 5
-      },
-      {
-        "value": "A",
-        "cell": ":"
-      },
-      {
-        "value": "C",
-        "cell": 6
-      },
-      {
-        "value": "H",
-        "cell": ":"
-      },
-      {
-        "value": "E",
-        "cell": ":"
-      },
-      {
-        "value": "T",
-        "cell": ":"
-      },
-      {
-        "value": "E",
-        "cell": ":"
-      },
-      "#",
-      {
-        "value": "S",
-        "cell": ":"
-      }
+      "S",
+      "I",
+      "T",
+      "U",
+      "P"
     ],
     [
-      {
-        "value": "P",
-        "cell": ":"
-      },
-      "#",
-      {
-        "value": "U",
-        "cell": ":"
-      },
-      "#",
-      {
-        "value": "M",
-        "cell": ":"
-      },
-      "#",
-      {
-        "value": "R",
-        "cell": ":"
-      },
-      "#",
-      {
-        "value": "I",
-        "cell": ":"
-      }
+      "U",
+      "N",
+      "I",
+      "T",
+      "#"
     ],
     [
-      {
-        "value": "O",
-        "cell": 7
-      },
-      {
-        "value": "A",
-        "cell": ":"
-      },
-      {
-        "value": "T",
-        "cell": ":"
-      },
-      {
-        "value": "H",
-        "cell": ":"
-      },
-      "#",
-      {
-        "value": "B",
-        "cell": 8
-      },
-      {
-        "value": "L",
-        "cell": ":"
-      },
-      {
-        "value": "O",
-        "cell": ":"
-      },
-      {
-        "value": "G",
-        "cell": ":"
-      }
-    ],
-    [
-      {
-        "value": "N",
-        "cell": ":"
-      },
-      "#",
-      {
-        "value": "L",
-        "cell": ":"
-      },
-      "#",
-      {
-        "value": "C",
-        "cell": 9
-      },
-      "#",
-      {
-        "value": "A",
-        "cell": ":"
-      },
-      "#",
-      {
-        "value": "N",
-        "cell": ":"
-      }
-    ],
-    [
-      {
-        "value": "E",
-        "cell": ":"
-      },
-      "#",
-      {
-        "value": "A",
-        "cell": 10
-      },
-      {
-        "value": "N",
-        "cell": ":"
-      },
-      {
-        "value": "O",
-        "cell": ":"
-      },
-      {
-        "value": "D",
-        "cell": ":"
-      },
-      {
-        "value": "Y",
-        "cell": ":"
-      },
-      {
-        "value": "N",
-        "cell": ":"
-      },
-      {
-        "value": "E",
-        "cell": ":"
-      }
-    ],
-    [
-      {
-        "value": "N",
-        "cell": ":"
-      },
-      "#",
-      {
-        "value": "S",
-        "cell": ":"
-      },
-      "#",
-      {
-        "value": "D",
-        "cell": ":"
-      },
-      "#",
-      "#",
-      "#",
-      {
-        "value": "R",
-        "cell": ":"
-      }
-    ],
-    [
-      {
-        "value": "T",
-        "cell": 11
-      },
-      {
-        "value": "A",
-        "cell": ":"
-      },
-      {
-        "value": "S",
-        "cell": ":"
-      },
-      {
-        "value": "T",
-        "cell": ":"
-      },
-      {
-        "value": "E",
-        "cell": ":"
-      },
-      {
-        "value": "L",
-        "cell": ":"
-      },
-      {
-        "value": "E",
-        "cell": ":"
-      },
-      {
-        "value": "S",
-        "cell": ":"
-      },
-      {
-        "value": "S",
-        "cell": ":"
-      }
+      "M",
+      "E",
+      "C",
+      "H",
+      "#"
     ]
   ]
 }
