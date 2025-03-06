@@ -1,5 +1,21 @@
 @import 'tailwindcss';
 
+@theme {
+  --color-primary-600: #af52de;
+  --color-active-600: #ffcc00;
+  --color-blue-100: #dfe5f2;
+  --color-neutral-300: #eeefe9;
+  --color-neutral-400: #9c9c9c;
+  --color-neutral-900: #1e1e1e;
+  --font-serif: 'Arno Pro', ui-serif, serif;
+  --font-sans: 'Futura Std', ui-sans-serif, sans-serif;
+
+  --breakpoint-xs: 30rem;
+}
+
+@import '@/assets/fonts/futura/font-face.css';
+@import '@/assets/fonts/arnopro/font-face.css';
+
 html,
 body {
   height: 100%;

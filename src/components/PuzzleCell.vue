@@ -86,12 +86,36 @@ const onDelete = (e: Event) => {
   setModelValue('')
 }
 
+const tryToCenterInput = (retries: number) => {
+  if (retries < 0) return
+  setTimeout(() => {
+    inputRef.value?.scrollIntoView({ block: 'center', behavior: 'smooth' })
+    tryToCenterInput(retries - 1)
+  }, 250)
+}
+
+const onClick = ({ row, column }: { row: number; column: number }) => {
+  setActiveCell({
+    y: row,
+    x: column,
+    direction:
+      activeCell.value.x === column && activeCell.value.y === row
+        ? activeCell.value.direction === 'horizontal'
+          ? 'vertical'
+          : 'horizontal'
+        : activeCell?.value.direction,
+  })
+  inputRef.value?.select()
+  tryToCenterInput(3)
+}
+
 watch(activeCell, (activeCell) => {
   if (!activeCell || activeCell.x !== props.column || activeCell.y !== props.row) return
 
   setTimeout(() => {
     inputRef.value?.focus()
     inputRef.value?.select()
+    tryToCenterInput(3)
   }, 0)
 })
 
@@ -104,12 +128,12 @@ async function sha256(source: string) {
 </script>
 
 <template>
-  <div v-if="cell.cell === blockValue" class="bg-gray-600" />
+  <div v-if="cell.cell === blockValue" class="bg-black" />
   <div v-else-if="cell.cell === null" />
   <div
     v-else
-    class="bg-white relative before:content-[attr(data-clue)] before:absolute before:top-0.5 before:left-0.5 text-gray-800 before:text-sm focus-within:!bg-yellow-200 hover:!bg-yellow-100"
-    :class="{ '!bg-blue-200': isActiveLine }"
+    class="bg-white relative before:content-[attr(data-clue)] before:absolute before:top-0 before:left-1 before:text-xs before:text-neutral-400 md:before:top-0.5 md:before:left-1.5 lg:before:top-0.5 lg:before:left-2 lg:before:text-base font-medium focus-within:!bg-active-600 hover:!bg-active-600 transition-colors hover:duration-[50ms] duration-300"
+    :class="{ '!bg-blue-100': isActiveLine }"
     :data-clue="
       cell.cell !== emptyValue && cell.cell !== 0 && typeof cell.cell === 'number'
         ? cell.cell
@@ -126,22 +150,11 @@ async function sha256(source: string) {
       @focus="setActiveCell({ y: row, x: column, direction: activeCell?.direction })"
       @input="setModelValueFromEvent"
       @keyup.delete="onDelete"
-      @pointerdown="
-        setActiveCell({
-          y: row,
-          x: column,
-          direction:
-            activeCell.x === column && activeCell.y === row
-              ? activeCell.direction === 'horizontal'
-                ? 'vertical'
-                : 'horizontal'
-              : activeCell?.direction,
-        }) === undefined && inputRef?.select()
-      "
+      @pointerdown="onClick({ row, column })"
       @pointerup.prevent
     />
     <div
-      class="absolute inset-x-0 top-1/2 -translate-y-1/2 pointer-events-none text-3xl text-center"
+      class="absolute inset-x-0 top-1/2 -translate-y-1/2 text-2xl md:text-3xl lg:text-4xl pointer-events-none text-center"
     >
       {{ modelValue }}
     </div>

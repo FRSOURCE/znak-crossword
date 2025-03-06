@@ -1,0 +1,219 @@
+@font-face {
+  font-family: 'Futura Std';
+  src:
+    local('Futura Std Light Condensed Oblique'),
+    local('FuturaStd-CondensedLightObl'),
+    url('FuturaStd-CondensedLightObl.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std';
+  src:
+    local('Futura Std Bold Oblique'),
+    local('FuturaStd-BoldOblique'),
+    url('FuturaStd-BoldOblique.woff2') format('woff2');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std';
+  src:
+    local('Futura Std Bold Condensed'),
+    local('FuturaStd-CondensedBold'),
+    url('FuturaStd-CondensedBold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std';
+  src:
+    local('Futura Std Extra Bold Condensed Oblique'),
+    local('FuturaStd-CondExtraBoldObl'),
+    url('FuturaStd-CondExtraBoldObl.woff2') format('woff2');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std';
+  src:
+    local('Futura Std Extra Bold Condensed'),
+    local('FuturaStd-CondensedExtraBd'),
+    url('FuturaStd-CondensedExtraBd.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std';
+  src:
+    local('Futura Std Extra Bold'),
+    local('FuturaStd-ExtraBold'),
+    url('FuturaStd-ExtraBold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std';
+  src:
+    local('Futura Std Book Oblique'),
+    local('FuturaStd-BookOblique'),
+    url('FuturaStd-BookOblique.woff2') format('woff2');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std';
+  src:
+    local('Futura Std Bold'),
+    local('FuturaStd-Bold'),
+    url('FuturaStd-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std';
+  src:
+    local('Futura Std Extra Bold Oblique'),
+    local('FuturaStd-ExtraBoldOblique'),
+    url('FuturaStd-ExtraBoldOblique.woff2') format('woff2');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std';
+  src:
+    local('Futura Std Heavy'),
+    local('FuturaStd-Heavy'),
+    url('FuturaStd-Heavy.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std';
+  src:
+    local('Futura Std Book'),
+    local('FuturaStd-Book'),
+    url('FuturaStd-Book.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std';
+  src:
+    local('Futura Std Medium Condensed'),
+    local('FuturaStd-Condensed'),
+    url('FuturaStd-Condensed.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std';
+  src:
+    local('Futura Std Medium Condensed Oblique'),
+    local('FuturaStd-CondensedOblique'),
+    url('FuturaStd-CondensedOblique.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std';
+  src:
+    local('Futura Std Light'),
+    local('FuturaStd-Light'),
+    url('FuturaStd-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std';
+  src:
+    local('Futura Std Light Condensed'),
+    local('FuturaStd-CondensedLight'),
+    url('FuturaStd-CondensedLight.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std';
+  src:
+    local('Futura Std Bold Condensed Oblique'),
+    local('FuturaStd-CondensedBoldObl'),
+    url('FuturaStd-CondensedBoldObl.woff2') format('woff2');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std';
+  src:
+    local('Futura Std Heavy Oblique'),
+    local('FuturaStd-HeavyOblique'),
+    url('FuturaStd-HeavyOblique.woff2') format('woff2');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std';
+  src:
+    local('Futura Std Medium Oblique'),
+    local('FuturaStd-MediumOblique'),
+    url('FuturaStd-MediumOblique.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std';
+  src:
+    local('Futura Std Light Oblique'),
+    local('FuturaStd-LightOblique'),
+    url('FuturaStd-LightOblique.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std';
+  src:
+    local('Futura Std Medium'),
+    local('FuturaStd-Medium'),
+    url('FuturaStd-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}

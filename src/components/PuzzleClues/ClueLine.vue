@@ -16,12 +16,13 @@ const emit = defineEmits(['click'])
 </script>
 
 <template>
-  <p
-    class="hidden md:block"
-    :class="{ '!block bg-blue-200': isActive, 'hover:bg-blue-100': !isActive }"
-  >
-    <button type="button" class="py-1 px-2 flex gap-x-2 cursor-pointer" @click="emit('click')">
-      <span class="hidden md:block">{{ clue.number }}</span>
+  <p :class="{ '!block bg-active-600': isActive, 'hover:bg-blue-100': !isActive }">
+    <button
+      type="button"
+      class="py-1 px-2 flex gap-x-2 cursor-pointer uppercase text-left"
+      @click="emit('click')"
+    >
+      {{ clue.number }}&#41;
       <span v-html="clue.clue" />
     </button>
   </p>
