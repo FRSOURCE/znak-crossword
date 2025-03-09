@@ -6,12 +6,12 @@
   "puzzle": [
     [{ "cell": 1, "style": { "shapebg": "circle" } }, 2, "#"],
     [3, { "style": { "shapebg": "circle" } }, 4],
-    [null, 5, { "style": { "shapebg": "circle" } }]
+    ["#", 5, { "style": { "shapebg": "circle" } }]
   ],
   "solution": [
     ["C", "A", "#"],
     ["B", "O", "T"],
-    [null, "L", "O"]
+    ["#", "L", "O"]
   ],
   "clues": {
     "Across": [

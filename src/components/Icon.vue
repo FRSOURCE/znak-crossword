@@ -1,5 +1,31 @@
 <script lang="ts">
-const parser = new DOMParser()
+const parser = import.meta.env.SSR
+  ? {
+      parseFromString: (data: string) => {
+        const [svgElement, ...rest] = data.trim().split('>')
+        rest.splice(rest.length - 2, 1)
+
+        const attrs = svgElement
+          .slice(5)
+          .split(/"(?: |$)/)
+          .reduce(
+            (p, attr) => {
+              if (!attr) return p
+              const [name, value] = attr.split('=')
+              p[name] = value.slice(1)
+              return p
+            },
+            {} as Record<string, string>,
+          )
+        const documentElement = {
+          getAttributeNames: () => Object.keys(attrs),
+          getAttribute: (name: string) => attrs[name] ?? null,
+          innerHTML: rest.join('>').trim(),
+        }
+        return { documentElement }
+      },
+    }
+  : new DOMParser()
 </script>
 
 <script lang="ts" setup>

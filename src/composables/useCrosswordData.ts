@@ -28,6 +28,7 @@ export const useCrosswordData = <EmptyValue extends string = '0', BlockValue ext
       }),
     ),
   )
+  const block = computed(() => crossword.value.block ?? '#')
   const dimensions = computed(() => crossword.value.dimensions)
   const clues = computed(() => {
     const clues = {} as Record<Direction, ClueObject[]>
@@ -40,12 +41,18 @@ export const useCrosswordData = <EmptyValue extends string = '0', BlockValue ext
     }
     return clues
   })
+  const isCompleted = computed(() =>
+    board.value.every((row, y) =>
+      row.every(({ cell }, x) => cell === block.value || cell === null || !!saved.value[y][x]),
+    ),
+  )
   return {
     saved,
     clues,
     crossword,
     board,
     dimensions,
+    isCompleted,
     metadata: computed(() => ({
       title: crossword.value.title,
       intro: crossword.value.intro,
@@ -54,7 +61,7 @@ export const useCrosswordData = <EmptyValue extends string = '0', BlockValue ext
       publisher: crossword.value.publisher,
       publication: crossword.value.publication,
       empty: crossword.value.empty ?? '0',
-      block: crossword.value.block ?? '#',
+      block: block.value,
     })),
   }
 }

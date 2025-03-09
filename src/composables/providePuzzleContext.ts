@@ -1,6 +1,6 @@
 import { getPuzzleContextKey, type ActiveCell, type ActiveClue } from '@/composables/PuzzleContext'
 import { useCrosswordData } from '@/composables/useCrosswordData'
-import type { ClueNum, ClueObject, Direction } from '@/types'
+import type { ClueNum, Direction } from '@/types'
 import { computed, provide, ref } from 'vue'
 
 export const providePuzzleContext = <
@@ -93,16 +93,15 @@ export const providePuzzleContext = <
     })
   }
 
-  provide(getPuzzleContextKey<EmptyValue, BlockValue>(), {
+  const context = {
     puzzle,
     activeCell,
     setActiveCell,
     activeClue,
     setActiveClue,
-  })
-
-  return {
-    activeCell,
-    setActiveCell,
   }
+
+  provide(getPuzzleContextKey<EmptyValue, BlockValue>(), context)
+
+  return context
 }

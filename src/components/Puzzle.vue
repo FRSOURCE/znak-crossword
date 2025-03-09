@@ -8,6 +8,7 @@ import PuzzleCluesList from './PuzzleClues/PuzzleCluesList.vue'
 import Icon from './Icon.vue'
 import clockIconData from '@/assets/clock.svg?raw'
 import infoIconData from '@/assets/info.svg?raw'
+import chevronIconData from '@/assets/chevron-left.svg?raw'
 import PuzzleCluesSelector from './PuzzleClues/PuzzleCluesSelector.vue'
 
 const props = defineProps({
@@ -23,10 +24,54 @@ const props = defineProps({
   },
 })
 
-const puzzle = useCrosswordData(computed(() => props.puzzleData))
+const crossword = useCrosswordData(computed(() => props.puzzleData))
 providePuzzleContext<EmptyValue, BlockValue>({
-  puzzle,
+  puzzle: crossword,
 })
+const { isCompleted } = crossword
+
+const checkCrosswordSolution = async () => {
+  if (!crossword.crossword.value.uniqueid) {
+    return console.error('Nie można sprawdzić krzyżówki, skontaktuj się z administracją')
+  }
+
+  const baseURL = import.meta.env.PROD
+    ? 'https://www.miesiecznik.znak.com.pl'
+    : 'http://localhost:8080'
+
+  const coupon = await fetch(`${baseURL}/wp-json/crossword-plugin/v0/crossword/1/solve`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      solution: crossword.saved.value.map((row, y) =>
+        row.map((cell, x) => {
+          const blockValue = crossword.metadata.value.block
+          const puzzleCell = crossword.board.value[y][x].cell
+          if (puzzleCell === blockValue) return blockValue
+          if (puzzleCell === null) return ''
+          return cell
+        }),
+      ),
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data)
+      if (data.status !== 'success') return Promise.reject(data)
+      if (data.code === 'wrong_solution') {
+        alert('Niepoprawne rozwiązanie, spróbuj czegoś innego :)')
+        return
+      }
+      return data.data.coupon
+    })
+    .catch((error) => {
+      console.error('Error:', error)
+    })
+
+  alert('Wygrałeś, Twój kupon to: ' + coupon)
+}
 </script>
 
 <template>
@@ -40,7 +85,22 @@ providePuzzleContext<EmptyValue, BlockValue>({
             <Icon :data="clockIconData" class="text-4xl" />
             00:00
           </div>
-          <div>
+          <div class="flex gap-4">
+            <button
+              class="cursor-pointer flex flex-col gap-0.5 text-center text-xs"
+              :class="{ 'text-gray-400': !isCompleted }"
+              :disabled="!isCompleted"
+              :title="
+                isCompleted
+                  ? 'Sprawdź krzyżówkę'
+                  : 'Uzupełnij wszystkie pola zanim będziesz mógł sprawdzić krzyżówkę'
+              "
+              type="button"
+              @click="checkCrosswordSolution"
+            >
+              <Icon :data="chevronIconData" class="text-[2rem] m-auto mt-0.5 -rotate-105" />
+              Gotowe
+            </button>
             <button class="cursor-pointer flex flex-col gap-0.5 text-center text-xs" type="button">
               <Icon :data="infoIconData" class="text-[2rem] m-auto mt-0.5" />
               O krzyżówce

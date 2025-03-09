@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { computedAsync, throttledRef } from '@vueuse/core'
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref, type UnwrapRef } from 'vue'
 import logoIconData from '@/assets/logo-crossword.svg?raw'
 import Puzzle from './components/Puzzle.vue'
 import Icon from './components/Icon.vue'
+import type { CrosswordPuzzle } from './types'
 
 const clueSelectorFixedPosition = ref<string>()
 const clueSelectorFixedPositionThrottled = throttledRef(clueSelectorFixedPosition, 10)
@@ -27,19 +28,30 @@ if (!import.meta.env.SSR && window.visualViewport) {
   window.addEventListener('scroll', recalculateViewportHeight, { passive: true })
 }
 
-const puzzles = {
+const demoPuzzles = {
   test: () => import('@/assets/test.ipuz'),
   another: () => import('@/assets/another.ipuz'),
   'even bigger': () => import('@/assets/even-bigger.ipuz'),
   '7x7': () => import('@/assets/even-bigger-7x7.ipuz'),
 }
-const activePuzzleId = ref(Object.keys(puzzles)[1] as keyof typeof puzzles)
+const puzzles = ref(
+  demoPuzzles as {
+    [k in keyof typeof demoPuzzles | 'default-ssr']?: () =>
+      | Promise<typeof import('*.ipuz')>
+      | typeof import('*.ipuz')
+  },
+)
+const activePuzzleId = ref(
+  import.meta.env.PROD
+    ? 'default-ssr'
+    : (Object.keys(puzzles.value)[1] as keyof UnwrapRef<typeof puzzles>),
+)
 const isPuzzleDataLoading = ref(false)
 const puzzleLoadingError = ref<unknown | undefined>()
 const puzzleData = computedAsync(
   async () => {
     puzzleLoadingError.value = undefined
-    return (await puzzles[activePuzzleId.value]()).default
+    return (await puzzles.value[activePuzzleId.value]?.())?.default
   },
   undefined,
   {
@@ -55,6 +67,21 @@ const isDebugMode = computed(() => {
   if (typeof window === 'undefined') return false
   const urlParams = new URLSearchParams(window.location.search)
   return urlParams.get('debug') !== null
+})
+
+onMounted(() => {
+  if (import.meta.env.PROD) {
+    puzzles.value = {
+      ...puzzles.value,
+      ['default-ssr']: () => ({
+        default: (
+          window as unknown as {
+            ZNAK_CROSSWORD_DATA: CrosswordPuzzle<{ width: number; height: number }>
+          }
+        ).ZNAK_CROSSWORD_DATA,
+      }),
+    }
+  }
 })
 </script>
 <template>
@@ -122,12 +149,15 @@ Error loading the puzzle: {{ puzzleLoadingError }} {{ puzzleData }}</pre
         >
       </template>
       <template v-else-if="!puzzleData">No puzzle data</template>
-      <Puzzle
-        v-else
-        :puzzleData="puzzleData"
-        :clue-selector-fixed-position="clueSelectorFixedPositionThrottled"
-        class="w-full"
-      />
+      <template v-else>
+        <client-only>
+          <Puzzle
+            :puzzleData="puzzleData"
+            :clue-selector-fixed-position="clueSelectorFixedPositionThrottled"
+            class="w-full"
+          />
+        </client-only>
+      </template>
     </div>
     <section
       class="hidden md:flex flex-col pt-6 pb-8 items-center bg-linear-to-b from-[#F4F3F4] to-white"
