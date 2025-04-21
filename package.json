@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "generate": "pnpm build --base=/frs-path-to-be-replaced-frs/ && node prepare-php-ssg.mjs && pnpm move-to-plugin",
+    "generate:prod": "VITE_API_URL=https://www.miesiecznik.znak.com.pl pnpm generate",
     "move-to-plugin": "rm -rf ../crossword-plugin/src/public/template && cp -r dist-php-ssg/ ../crossword-plugin/src/public/template",
     "preview": "vite preview",
     "test:e2e": "playwright test",
@@ -19,6 +20,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^12.7.0",
+    "canvas-confetti": "^1.9.3",
     "vue": "^3.5.13"
   },
   "devDependencies": {
@@ -28,6 +30,7 @@
     "@rollup/pluginutils": "^5.1.4",
     "@tailwindcss/vite": "^4.0.6",
     "@tsconfig/node22": "^22.0.0",
+    "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^22.13.1",
     "@unhead/vue": "2.0.0-rc.9",
     "@vitejs/plugin-vue": "^5.2.1",

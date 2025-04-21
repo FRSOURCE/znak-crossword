@@ -3,6 +3,7 @@ import type { CrosswordValue, LabeledCellObject } from '@/types'
 import { computed, nextTick, useTemplateRef, watch, type PropType } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
 import { usePuzzleContext } from '@/composables/usePuzzleContext'
+import { useBreakpoints } from '@/composables/useBreakpoints'
 
 const props = defineProps({
   cell: {
@@ -31,6 +32,7 @@ const modelValue = defineModel({
   type: String as PropType<CrosswordValue<EmptyValue, BlockValue>>,
   required: true,
 })
+const { md } = useBreakpoints()
 const hasNonTouchPointer = useMediaQuery('(pointer: fine)')
 const inputRef = useTemplateRef<HTMLInputElement>('input')
 const { activeCell, setActiveCell } = usePuzzleContext<EmptyValue, BlockValue>()
@@ -88,6 +90,7 @@ const onDelete = (e: Event) => {
 
 const tryToCenterInput = (retries: number) => {
   if (retries < 0) return
+  if (md.value) return
   setTimeout(() => {
     inputRef.value?.scrollIntoView({ block: 'center', behavior: 'smooth' })
     tryToCenterInput(retries - 1)
