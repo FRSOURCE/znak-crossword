@@ -11,6 +11,7 @@ import logoIconData from '@/assets/logo-crossword.svg?raw'
 
 const clueSelectorFixedPosition = ref<string>()
 const clueSelectorFixedPositionThrottled = throttledRef(clueSelectorFixedPosition, 10)
+const hasTouchPointer = useMediaQuery('(pointer: coarse)')
 
 if (!import.meta.env.SSR && window.visualViewport) {
   const VIEWPORT_VS_CLIENT_HEIGHT_RATIO = 0.75
@@ -21,9 +22,10 @@ if (!import.meta.env.SSR && window.visualViewport) {
       realVisualViewportHeight / window.screen.height < VIEWPORT_VS_CLIENT_HEIGHT_RATIO
     document.body.style.height = `${window.visualViewport?.height}px`
     document.documentElement.style.height = `${window.visualViewport?.height}px`
-    clueSelectorFixedPosition.value = isMobileKeyboardShown
-      ? `${Math.ceil(realVisualViewportHeight + window.scrollY)}px`
-      : undefined
+    clueSelectorFixedPosition.value =
+      hasTouchPointer.value && isMobileKeyboardShown
+        ? `${Math.ceil(realVisualViewportHeight + window.scrollY)}px`
+        : undefined
   }
 
   recalculateViewportHeight()
@@ -54,7 +56,7 @@ const puzzles = ref(
   },
 )
 const activePuzzleId = ref(
-  import.meta.env.PROD
+  import.meta.env.PROD && import.meta.env.VITE_IS_STAGE !== 'true'
     ? 'default-ssr'
     : (Object.keys(puzzles.value)[1] as keyof UnwrapRef<typeof puzzles>),
 )
@@ -75,7 +77,7 @@ const puzzleData = computedAsync(
 )
 
 onMounted(() => {
-  if (import.meta.env.PROD) {
+  if (import.meta.env.PROD && import.meta.env.VITE_IS_STAGE !== 'true') {
     puzzles.value = {
       ...puzzles.value,
       ['default-ssr']: () => ({

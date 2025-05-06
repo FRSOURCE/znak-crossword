@@ -8,6 +8,8 @@ import tailwindcss from '@tailwindcss/vite'
 
 import ipuz from './ipuz-vite-plugin'
 
+const IS_STAGE = process.env.VITE_IS_STAGE === 'true'
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [vue(), vueDevTools(), tailwindcss(), ipuz()], //, tailwindcssCleaner()],
@@ -16,15 +18,17 @@ export default defineConfig({
       '@': resolve(import.meta.dirname, 'src'),
     },
   },
-  experimental: {
-    renderBuiltUrl(filename, { hostType, ssr }) {
-      if (hostType === 'js' && !ssr) {
-        return {
-          runtime: `typeof window !== 'undefined' && window.__frs_crossword_withBaseURL(${JSON.stringify(filename)})`,
-        }
-      } else {
-        return { relative: true }
-      }
-    },
-  },
+  experimental: IS_STAGE
+    ? {}
+    : {
+        renderBuiltUrl(filename, { hostType, ssr }) {
+          if (hostType === 'js' && !ssr) {
+            return {
+              runtime: `typeof window !== 'undefined' && window.__frs_crossword_withBaseURL(${JSON.stringify(filename)})`,
+            }
+          } else {
+            return { relative: true }
+          }
+        },
+      },
 })

@@ -103,7 +103,9 @@ const fetchCheckSolution = async (): Promise<{
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        // eslint-disable-next-line eslint-plugin-unicorn(no-new-array)
         solution: new Array(dimensions.width).fill(0).map((_, y) =>
+          // eslint-disable-next-line eslint-plugin-unicorn(no-new-array)
           new Array(dimensions.height).fill(0).map((_, x) => {
             const cell = saved[y][x]
             const blockValue = crossword.metadata.value.block
