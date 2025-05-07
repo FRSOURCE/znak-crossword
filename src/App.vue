@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computedAsync, throttledRef } from '@vueuse/core'
+import { useMediaQuery, computedAsync, throttledRef } from '@vueuse/core'
 import { computed, defineAsyncComponent, onMounted, ref, type UnwrapRef } from 'vue'
 import Puzzle from '@/components/Puzzle.vue'
 import type { CrosswordPuzzle } from '@/types'
@@ -101,7 +101,7 @@ onMounted(() => {
     />
     <div v-if="!isGameStarted" :class="{ 'sr-only md:not-sr-only': isGameStarted }">
       <div
-        class="mt-6 px-2 xs:px-4.5 flex justify-center items-center gap-6 md:gap-8 tracking-tight xs:tracking-normal"
+        class="mt-6 px-2 xs:px-4.5 flex justify-center items-center gap-6 md:mt-10 md:gap-8 tracking-tight xs:tracking-normal"
         :class="{ 'flex-col text-center': !isGameStarted }"
       >
         <Icon :data="logoIconData" class="text-8xl" />

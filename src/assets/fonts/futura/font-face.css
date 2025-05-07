@@ -76,11 +76,11 @@
 } */
 
 @font-face {
-  font-family: 'Futura Std';
+  font-family: 'Futura PT';
   src:
-    local('Futura Std Bold'),
-    local('FuturaStd-Bold'),
-    url('FuturaStd-Bold.woff2') format('woff2');
+    local('Futura PT Bold'),
+    local('FuturaPT-Bold'),
+    url('FuturaPT-Bold.woff2') format('woff2');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -109,11 +109,11 @@
 } */
 
 @font-face {
-  font-family: 'Futura Std';
+  font-family: 'Futura PT';
   src:
-    local('Futura Std Book'),
-    local('FuturaStd-Book'),
-    url('FuturaStd-Book.woff2') format('woff2');
+    local('Futura PT Book'),
+    local('FuturaPT-Book'),
+    url('FuturaPT-Book.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -142,11 +142,11 @@
 } */
 
 @font-face {
-  font-family: 'Futura Std';
+  font-family: 'Futura PT';
   src:
-    local('Futura Std Light'),
-    local('FuturaStd-Light'),
-    url('FuturaStd-Light.woff2') format('woff2');
+    local('Futura PT Light'),
+    local('FuturaPT-Light'),
+    url('FuturaPT-Light.woff2') format('woff2');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -208,11 +208,11 @@
 } */
 
 @font-face {
-  font-family: 'Futura Std';
+  font-family: 'Futura PT';
   src:
-    local('Futura Std Medium'),
-    local('FuturaStd-Medium'),
-    url('FuturaStd-Medium.woff2') format('woff2');
+    local('Futura PT Medium'),
+    local('FuturaPT-Medium'),
+    url('FuturaPT-Medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;

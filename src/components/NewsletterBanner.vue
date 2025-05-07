@@ -10,7 +10,7 @@
     <NewsletterBannerContent />
   </Modal>
   <section
-    class="hidden md:flex flex flex-col mt-2 pt-6 pb-8 items-center bg-linear-to-b from-[#F4F3F4] to-white"
+    class="hidden md:flex flex flex-col mt-auto pt-6 pb-8 items-center bg-linear-to-b from-[#F4F3F4] to-white"
   >
     <NewsletterBannerContent />
   </section>

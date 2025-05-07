@@ -10,7 +10,7 @@ import Icon from '@/components/Icon.vue'
 import clockIconData from '@/assets/clock.svg?raw'
 import copyIconData from '@/assets/copy.svg?raw'
 import checkIconData from '@/assets/check.svg?raw'
-// import infoIconData from '@/assets/info.svg?raw'
+import infoIconData from '@/assets/info.svg?raw'
 // import chevronIconData from '@/assets/chevron-left.svg?raw'
 import PuzzleCluesSelector from './PuzzleClues/PuzzleCluesSelector.vue'
 import Modal from '@/components/Modal.vue'
@@ -63,6 +63,7 @@ providePuzzleContext<EmptyValue, BlockValue>({
 })
 const { isCompleted } = crossword
 
+const infoModalOpen = ref(false)
 const modalOpen = ref(false)
 const modalState = ref<'loading' | 'completed' | 'wrongSolution' | 'error' | undefined>()
 
@@ -170,7 +171,9 @@ const onModalClose = () => {
   >
     <Teleport to="#frs-puzzle-header">
       <div class="bg-neutral-300">
-        <div class="max-w-240 m-auto px-2 xs:px-4.5 py-1.5 flex justify-between items-center">
+        <div
+          class="max-w-240 m-auto px-2 xs:px-4.5 py-1.5 md:py-3 flex justify-between items-center"
+        >
           <div>
             <Icon :data="clockIconData" class="text-4xl" />
             {{ timeElapsed }}
@@ -191,10 +194,14 @@ const onModalClose = () => {
               <Icon :data="chevronIconData" class="text-[2rem] m-auto mt-0.5 -rotate-105" />
               Gotowe
             </button> -->
-            <!-- <button class="cursor-pointer flex flex-col gap-0.5 text-center text-xs" type="button">
+            <button
+              class="cursor-pointer flex flex-col gap-0.5 text-center text-xs"
+              type="button"
+              @click="infoModalOpen = true"
+            >
               <Icon :data="infoIconData" class="text-[2rem] m-auto mt-0.5" />
               O krzyżówce
-            </button> -->
+            </button>
           </div>
         </div>
       </div>
@@ -211,7 +218,7 @@ const onModalClose = () => {
         }
       "
     />
-    <div class="[grid-area:board] mb-4 flex w-full md:w-auto">
+    <div class="[grid-area:board] mb-6 flex w-full md:w-auto">
       <PuzzleBoard class="m-auto" />
     </div>
     <PuzzleCluesList class="[grid-area:clues]" />
@@ -237,7 +244,7 @@ const onModalClose = () => {
         Krzyżowka ZNAKU
       </p>
       <div class="flex flex-col items-center" v-if="modalState === 'completed'">
-        <h2 class="mb-3 font-serif font-medium font-bold text-2xl">50% zniżki jest Twoje!</h2>
+        <h2 class="mb-3 font-serif font-bold text-2xl">50% zniżki jest Twoje!</h2>
         <p class="font-medium">Gratulujemy, rozwiązanie krzyżówki zajęło Ci: {{ timeElapsed }}!</p>
         <p class="font-medium mt-2">
           Skopiuj i zapisz poniższy kod rabatowy. Wklej go w okienko "Dodaj kod rabatowy" podczas
@@ -267,14 +274,14 @@ const onModalClose = () => {
         </p>
       </div>
       <div v-else-if="modalState === 'loading'">
-        <h2 class="mb-3 font-serif font-medium font-bold text-2xl">Sprawdzanie krzyżówki...</h2>
+        <h2 class="mb-3 font-serif font-bold text-2xl">Sprawdzanie krzyżówki...</h2>
         <p class="font-medium">
           Proszę czekać, Twoje rozwiązanie jest teraz wnikliwie oceniane przez naszych jurorów 🔍
         </p>
         <p class="mt-4 text-sm font-medium">Prosimy, nie zamykaj tej strony.</p>
       </div>
       <div v-else-if="modalState === 'wrongSolution'">
-        <h2 class="mb-3 font-serif font-medium font-bold text-2xl">Jesteś blisko!</h2>
+        <h2 class="mb-3 font-serif font-bold text-2xl">Jesteś blisko!</h2>
         <p class="font-medium">Niestety to jeszcze nie jest poprawne rozwiązanie krzyzówki.</p>
         <p class="font-medium">
           Spróbuj ponownie i odbierz 50% zniżki na subskrypcję Miesięcznika Znak.
@@ -284,11 +291,31 @@ const onModalClose = () => {
         </Button>
       </div>
       <div v-else>
-        <h2 class="mb-3 font-serif font-medium font-bold text-2xl">Błąd!</h2>
+        <h2 class="mb-3 font-serif font-bold text-2xl">Błąd!</h2>
         <p class="font-medium">Mamy błąd z naszym serwerem.</p>
         <p class="font-medium">
           Spróbuj ponownie za jakiś czas lub skontaktuj się z nami, jeśli problem się powtarza.
         </p>
+        <Button size="sm" class="mt-6 md:mt-4 mx-auto px-16 block" @click="close()">
+          Zamknij
+        </Button>
+      </div>
+    </Modal>
+
+    <Modal
+      v-model="infoModalOpen"
+      class="flex flex-col items-center text-center"
+      show-after-mount
+      closable
+      v-slot="{ close }"
+    >
+      <p class="m-auto max-w-160 px-2 xs:px-4.5 pb-4 text-xs uppercase text-primary-600">
+        Krzyżowka ZNAKU
+      </p>
+      <div class="flex flex-col items-center">
+        <h2 class="mb-3 font-serif font-bold text-2xl">Baw się z nami co tydzień!</h2>
+        <p class="font-medium">Gdy ją rozwiążesz, otrzymasz 50% zniżki na subskrypcję.</p>
+        <p class="font-bold">Miłej zabawy!</p>
         <Button size="sm" class="mt-6 md:mt-4 mx-auto px-16 block" @click="close()">
           Zamknij
         </Button>
