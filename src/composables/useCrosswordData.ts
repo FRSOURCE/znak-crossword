@@ -62,6 +62,7 @@ export const useCrosswordData = <EmptyValue extends string = '0', BlockValue ext
       publication: crossword.value.publication,
       empty: crossword.value.empty ?? '0',
       block: block.value,
+      id: crossword.value.uniqueid,
     })),
   }
 }

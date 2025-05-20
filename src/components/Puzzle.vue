@@ -89,7 +89,7 @@ watchDebounced(
   { deep: true, debounce: 2500 },
 )
 
-const fetchCheckSolution = async (): Promise<{
+const fetchCheckSolution = async (id: string): Promise<{
   coupon?: string
   nextModalState: UnwrapRef<typeof modalState>
 }> => {
@@ -100,24 +100,27 @@ const fetchCheckSolution = async (): Promise<{
   } = crossword
 
   try {
-    const res = await fetch(`${baseURL}/wp-json/crossword-plugin/v0/crossword/1/solve`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        // eslint-disable-next-line eslint-plugin-unicorn(no-new-array)
-        solution: new Array(dimensions.width).fill(0).map((_, y) =>
+    const res = await fetch(
+      `${baseURL}/wp-json/crossword-plugin/v0/crossword/${id}/solve`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           // eslint-disable-next-line eslint-plugin-unicorn(no-new-array)
-          new Array(dimensions.height).fill(0).map((_, x) => {
-            const cell = saved[y][x]
-            const blockValue = crossword.metadata.value.block
-            const puzzleCell = crossword.board.value[y][x].cell
-            if (puzzleCell === blockValue) return blockValue
-            if (puzzleCell === null) return ''
-            return cell
-          }),
-        ),
-      }),
-    })
+          solution: new Array(dimensions.width).fill(0).map((_, y) =>
+            // eslint-disable-next-line eslint-plugin-unicorn(no-new-array)
+            new Array(dimensions.height).fill(0).map((_, x) => {
+              const cell = saved[y][x]
+              const blockValue = crossword.metadata.value.block
+              const puzzleCell = crossword.board.value[y][x].cell
+              if (puzzleCell === blockValue) return blockValue
+              if (puzzleCell === null) return ''
+              return cell
+            }),
+          ),
+        }),
+      },
+    )
     const data = await res.json()
     if (data.code === 'wrong_solution') return { nextModalState: 'wrongSolution' }
     if (data.status !== 'success') return { nextModalState: 'error' }
@@ -130,7 +133,7 @@ const fetchCheckSolution = async (): Promise<{
 }
 
 const checkCrosswordSolution = async () => {
-  if (!crossword.crossword.value.uniqueid) {
+  if (!crossword.metadata.value.id) {
     return console.error('Nie można sprawdzić krzyżówki, skontaktuj się z administracją')
   }
   modalOpen.value = true
@@ -138,7 +141,7 @@ const checkCrosswordSolution = async () => {
   isTimerActive.value = false
 
   const [{ coupon: couponData, nextModalState }] = await Promise.all([
-    fetchCheckSolution(),
+    fetchCheckSolution(crossword.metadata.value.id),
     new Promise<void>((resolve) => {
       setTimeout(() => {
         resolve()
