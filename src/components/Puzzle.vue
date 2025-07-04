@@ -107,9 +107,9 @@ const fetchCheckSolution = async (id: string): Promise<{
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           // eslint-disable-next-line eslint-plugin-unicorn(no-new-array)
-          solution: new Array(dimensions.width).fill(0).map((_, y) =>
+          solution: new Array(dimensions.height).fill(0).map((_, y) =>
             // eslint-disable-next-line eslint-plugin-unicorn(no-new-array)
-            new Array(dimensions.height).fill(0).map((_, x) => {
+            new Array(dimensions.width).fill(0).map((_, x) => {
               const cell = saved[y][x]
               const blockValue = crossword.metadata.value.block
               const puzzleCell = crossword.board.value[y][x].cell
@@ -273,7 +273,7 @@ const onModalClose = () => {
         </Button>
 
         <p class="mt-4 text-xs">
-          Kod rabatowy jest ważny przez 60 dni od daty opublikowania krzyżówki.
+          Kod rabatowy jest ważny przez 7 dni od daty opublikowania krzyżówki.
         </p>
       </div>
       <div v-else-if="modalState === 'loading'">
